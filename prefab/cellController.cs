@@ -9,18 +9,25 @@ public class cellController : MonoBehaviour
     public GameObject cellPrefab;
     public float dpos;
     bool isMultiple = false;
+    public int maxTree;
      void Start()
     {
     }
     void Update()
     {
-        if(isMultiple == false) {
-            isMultiple = true;
-            Invoke("metastasis",dt_metastasis);
-        }
+        GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
+        if (trees.Length < maxTree) 
+            {
+                if (isMultiple == false)
+                {
+                    isMultiple = true;
+                    Invoke("metastasis", dt_metastasis);
+                }
+            }
     }
 
-    void metastasis(){
+    void metastasis()
+    {
         Vector3 pos = transform.position;
         r=UnityEngine.Random.Range(0,4);//0,1,2,3  
         switch(r) {
@@ -34,7 +41,8 @@ public class cellController : MonoBehaviour
         isMultiple = false;
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
+    void OnCollisionEnter2D(Collision2D col) 
+    {
         Destroy(gameObject);
     }
 }

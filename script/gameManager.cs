@@ -7,6 +7,8 @@ public class gameManager : MonoBehaviour
 {
 
     public GameObject clearUI;
+    public GameObject tText;
+    tController t;
 
     void Start()
     {
@@ -17,10 +19,15 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
-        Debug.Log(trees.Length);
         if(trees.Length == 0) {
             clear();
-
+            t.isCount = false;
+        } else
+        {
+            int it = (int)t.display;
+            Debug.Log(it);
+            t.isCount = false;
+            tText.GetComponent<Text>().text = it.ToString();
         }
         
     }
