@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class fire2Controller : MonoBehaviour
 {
     public float speed = 11.0f;
     public GameObject arrowPrefab;
+    public bool isGetButtonDown;
+    public bool isPower = true;
     bool isFire = false;
-    string motionName;
-    Animator motion;
+    public Animator motion;
     float radius,theta,larrow=0.3f;
     float ix, iy;
     
@@ -18,12 +20,21 @@ public class fire2Controller : MonoBehaviour
 
     void Update()
     {
+
         if(Input.GetButtonDown("Fire2")) {
-            if(!isFire) {
-                isFire = true;
-                Invoke("fire",0.2f);
-                Invoke("stopFire",0.2f);
+            isGetButtonDown = true;
+            if(isPower) {
+                if(!isFire) {
+                    isFire = true;
+                    motion.SetBool("isFire",true);
+                    Invoke("fire",0.2f);
+                    Invoke("stopFire",0.2f);
+                } else {
+                    motion.SetBool("isFire",false);
+                }
             }
+        } else {
+            isGetButtonDown = false;
         }
     }
 
@@ -47,6 +58,8 @@ public class fire2Controller : MonoBehaviour
                 Vector3 v = new Vector3(ix,iy)*speed;
                 b.AddForce(v, ForceMode2D.Impulse);
             }
+
+
     }
 
     public void stopFire() {

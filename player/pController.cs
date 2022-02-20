@@ -17,7 +17,7 @@ public class pController : MonoBehaviour
 	Animator motion;
     string motionName = "";
     string lastMotion = "";
-    string fireName = "";
+//    string fireName = "";
     bool isFire = false;
     bool isLeft;
 

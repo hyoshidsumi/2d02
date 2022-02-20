@@ -8,15 +8,19 @@ public class cellController : MonoBehaviour
     public float dt_metastasis;
     public GameObject cellPrefab;
     public float dpos;
+    public int tree_max;    
     bool isMultiple = false;
      void Start()
     {
     }
     void Update()
     {
-        if(isMultiple == false) {
-            isMultiple = true;
-            Invoke("metastasis",dt_metastasis);
+        GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
+        if(trees.Length < tree_max) {
+            if(isMultiple == false) {
+                isMultiple = true;
+                Invoke("metastasis",dt_metastasis);
+            }
         }
     }
 
