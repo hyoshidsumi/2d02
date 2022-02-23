@@ -8,6 +8,7 @@ public class cellController : MonoBehaviour
     public float dt_metastasis;
     public GameObject cellPrefab;
     public float dpos;
+    public int hp;
     public int tree_max;    
     bool isMultiple = false;
      void Start()
@@ -39,6 +40,12 @@ public class cellController : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        Destroy(gameObject);
+//        if(col.gameObject.tag == "tile") {
+//            Destroy(gameObject);
+//        }
+        hp--;
+        if(hp < 0) {
+            Destroy(gameObject);
+        }
     }
 }

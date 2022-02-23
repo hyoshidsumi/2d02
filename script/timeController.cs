@@ -14,6 +14,7 @@ public class timeController : MonoBehaviour
 
     void Start()
     {
+        time = (float)PlayerPrefs.GetFloat("time");
     }
 
     // Update is called once per frame
@@ -32,8 +33,9 @@ public class timeController : MonoBehaviour
                 isTimeRegen = true;
             }
             itime = (int)time;
-            timer.GetComponent<Text>().text = itime.ToString();
-
+            timer.GetComponent<Text>().text = itime.ToString();            
+        } else {
+            PlayerPrefs.SetFloat("time",(float)itime);
         }
 
     }

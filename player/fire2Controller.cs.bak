@@ -7,80 +7,39 @@ public class fire2Controller : MonoBehaviour
 {
     public float speed = 11.0f;
     public GameObject arrowPrefab;
-    public Slider slider;
     public bool isGetButtonDown;
-    public int power_max = 100;
-    public int power_fire1 = 8;
-    public int power_fire2 = 40;
     public bool isPower = true;
-    timeController tc;
-    gameManager gm;
-    pController p;
     bool isFire = false;
     public Animator motion;
     float radius,theta,larrow=0.3f;
     float ix, iy;
-    int power;
     
     void Start() {
-
         Vector3 pos = transform.position;
-        power = power_max;
     }
 
-    void Update()  {
-        pController p = GetComponent<pController>();
-        GameObject gc = GameObject.FindGameObjectWithTag("GameController");
-        tc = gc.GetComponent<timeController>();
-        tc.isCount = true;
-
-        if(tc.isRegen) {
-            power += 40;
-            if(power > power_max) {
-                power = power_max;
-            }
-            slider.value = (float)power/(float)power_max;
-        }
-
-        if(Input.GetButton("Fire1")) {
-            if(!isFire) {
-                isFire = true;
-                Invoke("fire1",0.2f);
-                Invoke("stopFire",0.2f);
-            }
-        }
+    void Update()
+    {
 
         if(Input.GetButtonDown("Fire2")) {
-            if(!isFire) {
-                if(power-power_fire2 >= 0) {
-                    power -= power_fire2;
+            isGetButtonDown = true;
+            if(isPower) {
+                if(!isFire) {
                     isFire = true;
                     motion.SetBool("isFire",true);
-                    Invoke("fire2",0.2f);
+                    Invoke("fire",0.2f);
                     Invoke("stopFire",0.2f);
-                    slider.value = (float)power/(float)power_max;
                 } else {
                     motion.SetBool("isFire",false);
                 }
             }
+        } else {
+            isGetButtonDown = false;
         }
-
     }
 
-    public void fire1(){
-            pController p = GetComponent<pController>();
-            theta = (-p.phi+90)*Mathf.PI/180;
-            ix = Mathf.Cos(theta);
-            iy = Mathf.Sin(theta);
+    public void fire(){
 
-            GameObject arrow = Instantiate(arrowPrefab, transform.position, Quaternion.Euler(0,0,-p.phi));
-            Rigidbody2D b = arrow.GetComponent<Rigidbody2D>();
-
-            Vector3 v = new Vector3(Mathf.Cos(theta),Mathf.Sin(theta))*speed;
-            b.AddForce(v, ForceMode2D.Impulse);        
-            
-    }
-    public void fire2(){
             pController p = GetComponent<pController>();
             theta = (-p.phi+90)*Mathf.PI/180;
             ix = Mathf.Cos(theta);
