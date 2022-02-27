@@ -14,7 +14,6 @@ public class fire2Controller : MonoBehaviour
     public int power_fire2 = 40;
     public bool isPower = true;
     timeController tc;
-    gameManager gm;
     pController p;
     bool isFire = false;
     public Animator motion;

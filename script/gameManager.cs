@@ -9,6 +9,8 @@ public class gameManager : MonoBehaviour
     public GameObject clearUI;
     public GameObject sliderUI;
     public GameObject text;
+    public GameObject hText;
+    public GameObject pText;
     timeController tc;
     GameObject residue;
     changeScene cs;

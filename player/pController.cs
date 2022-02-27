@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class pController : MonoBehaviour
 {
@@ -20,13 +21,19 @@ public class pController : MonoBehaviour
 //    string fireName = "";
     bool isFire = false;
     bool isLeft;
-
+    int health;
+    public int health_max;
+    public Slider hSlider;
+    gameManager gm;
     void Start()
     {
         rbody = this.GetComponent<Rigidbody2D>();
         motion = this.GetComponent<Animator>();
         motionName = mhold;
         lastMotion = mhold;
+        health = health_max;
+        GameObject gc = GameObject.FindGameObjectWithTag("GameController");
+        gm = gc.GetComponent<gameManager>();
     }
 
     void Update()
@@ -123,5 +130,15 @@ public class pController : MonoBehaviour
     {
 
         rbody.velocity = new Vector2(ix*speed, iy*speed);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision) {
+        health -= 10;
+        if(health < 0) {
+            health = 0;
+            Debug.Log("dead");
+        }
+        hSlider.value = (float)health/(float)health_max;
+        gm.hText.GetComponent<Text>().text = health.ToString();
     }
 }

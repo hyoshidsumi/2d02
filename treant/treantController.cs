@@ -21,6 +21,7 @@ public class treantController : MonoBehaviour
     bool isFire = false;
     bool isLeft;
     int r;
+    float time;
 
     void Start()
     {
@@ -32,15 +33,19 @@ public class treantController : MonoBehaviour
 
     void Update()
     {
-        r=UnityEngine.Random.Range(0,4);//0,1,2,3  
-        switch(r) {
-            case 0: ix=1; iy=0; break;
-            case 1: ix=-1; iy=0; break;
-            case 2: ix=0; iy=1; break;
-            case 3: ix=0; iy=-1; break;
-            default: break;
-        }        
-        
+        time += Time.deltaTime;
+        if(time > 2.0f) {
+            time = 0;
+
+            r=UnityEngine.Random.Range(0,4);//0,1,2,3  
+            switch(r) {
+                case 0: ix=1; iy=0; break;
+                case 1: ix=-1; iy=0; break;
+                case 2: ix=0; iy=1; break;
+                case 3: ix=0; iy=-1; break;
+                default: break;
+            }        
+            
             switch(iy) {
                 case 1: 
                     motionName = mw;
@@ -93,12 +98,11 @@ public class treantController : MonoBehaviour
                 break;
             }
             
-
             if(motionName != lastMotion) {
                 motion.Play(motionName);
                 lastMotion = motionName;
             }
-
+        }
     }
 
     public void stopFire() {
@@ -107,7 +111,6 @@ public class treantController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         rbody.velocity = new Vector2(ix*speed, iy*speed);
     }
 }

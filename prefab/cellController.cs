@@ -6,7 +6,7 @@ public class cellController : MonoBehaviour
 {
     int r;
     public float dt_metastasis;
-    public GameObject cellPrefab;
+    public GameObject cellPrefab, extinctPrefab;
     public float dpos;
     public int hp;
     public int tree_max;    
@@ -41,10 +41,11 @@ public class cellController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col) {
 //        if(col.gameObject.tag == "tile") {
-//            Destroy(gameObject);
+//            Destroy(gameObject);  
 //        }
         hp--;
         if(hp < 0) {
+            GameObject effect_extinct = Instantiate(extinctPrefab,transform.position,Quaternion.identity);            
             Destroy(gameObject);
         }
     }

@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dt_metastasis: 2
   cellPrefab: {fileID: 8555037793314105475}
+  extinctPrefab: {fileID: 8239464048701126938, guid: a5c6d1cadfc0b4272a4e73fbe3fbe863, type: 3}
   dpos: 3
   hp: 2
   tree_max: 40
@@ -130,7 +131,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
