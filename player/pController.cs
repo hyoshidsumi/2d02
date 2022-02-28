@@ -25,6 +25,8 @@ public class pController : MonoBehaviour
     public int health_max;
     public Slider hSlider;
     gameManager gm;
+    changeScene cs;
+
     void Start()
     {
         rbody = this.GetComponent<Rigidbody2D>();
@@ -34,11 +36,11 @@ public class pController : MonoBehaviour
         health = health_max;
         GameObject gc = GameObject.FindGameObjectWithTag("GameController");
         gm = gc.GetComponent<gameManager>();
+        cs = gc.GetComponent<changeScene>();
     }
 
     void Update()
     {
-        
             ix = Input.GetAxisRaw("Horizontal");
             iy = Input.GetAxisRaw("Vertical");
             switch(iy) {
@@ -136,7 +138,8 @@ public class pController : MonoBehaviour
         health -= 10;
         if(health < 0) {
             health = 0;
-            Debug.Log("dead");
+            gm.clear();
+//            cs.Load2("pancreas");
         }
         hSlider.value = (float)health/(float)health_max;
         gm.hText.GetComponent<Text>().text = health.ToString();

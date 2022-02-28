@@ -21244,7 +21244,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811937393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b4c9e8aeed20484a8dce6d312f6f5f7, type: 3}
   m_Name: 
@@ -21265,6 +21265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 11
   arrowPrefab: {fileID: 7143925116040475428, guid: 71bfa09f743324c85bb62f2fcc42cff3, type: 3}
+  arrow2Prefab: {fileID: 4142919756012639142, guid: 24f641c8d934d4161aa803c725c42a55, type: 3}
+  bombPrefab: {fileID: 8001387999361706732, guid: d38fcdb8a881e415d8da9f80e7401725, type: 3}
   slider: {fileID: 1077149965}
   isGetButtonDown: 0
   power_max: 100

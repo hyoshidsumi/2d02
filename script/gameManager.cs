@@ -37,7 +37,7 @@ public class gameManager : MonoBehaviour
             menu();
         }
     }
-    void clear() {
+    public void clear() {
         clearUI.SetActive(true);
         sliderUI.SetActive(false);
         tc.isCount = false;

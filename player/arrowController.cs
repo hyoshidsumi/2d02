@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class arrowController : MonoBehaviour
 {
+    public float duration;
     void Start()
     {
-        Destroy(gameObject,2.0f);        
+        Destroy(gameObject,duration);        
     }
 
     // Update is called once per frame
