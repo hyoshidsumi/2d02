@@ -21266,7 +21266,7 @@ MonoBehaviour:
   speed: 11
   arrowPrefab: {fileID: 7143925116040475428, guid: 71bfa09f743324c85bb62f2fcc42cff3, type: 3}
   arrow2Prefab: {fileID: 4142919756012639142, guid: 24f641c8d934d4161aa803c725c42a55, type: 3}
-  bombPrefab: {fileID: 8001387999361706732, guid: d38fcdb8a881e415d8da9f80e7401725, type: 3}
+  bombPrefab: {fileID: 8256833240002503714, guid: 15f8a3483f0088b41b46b7e81ae342de, type: 3}
   slider: {fileID: 1077149965}
   isGetButtonDown: 0
   power_max: 100

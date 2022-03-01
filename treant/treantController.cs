@@ -22,6 +22,7 @@ public class treantController : MonoBehaviour
     bool isLeft;
     int r;
     float time;
+    pController p;
 
     void Start()
     {
@@ -33,6 +34,26 @@ public class treantController : MonoBehaviour
 
     void Update()
     {
+
+        GameObject po = GameObject.FindGameObjectWithTag("Player");
+        p = po.GetComponent<pController>();
+        Vector3 ppos = p.transform.position;
+        float dist = Vector2.Distance(transform.position, ppos);
+        if(dist < 8 && isFire == false)
+        {
+            float dx = ppos.x - transform.position.x;
+            float dy = ppos.y - transform.position.y;
+            float rad = Mathf.Atan2(dy, dx);
+            float angle = rad * Mathf.Rad2Deg;
+            Quaternion r = Quaternion.Euler(0, 0, angle);
+            float bx = Mathf.Cos(rad);
+            float by = Mathf.Sin(rad);
+            Vector3 b = new Vector3(bx, by) * 9.0f;
+        }
+
+        Debug.Log(dist);
+
+        //move
         time += Time.deltaTime;
         if(time > 2.0f) {
             time = 0;
@@ -45,7 +66,7 @@ public class treantController : MonoBehaviour
                 case 3: ix=0; iy=-1; break;
                 default: break;
             }        
-            
+           
             switch(iy) {
                 case 1: 
                     motionName = mw;
@@ -103,6 +124,7 @@ public class treantController : MonoBehaviour
                 lastMotion = motionName;
             }
         }
+
     }
 
     public void stopFire() {
