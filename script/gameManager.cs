@@ -11,6 +11,7 @@ public class gameManager : MonoBehaviour
     public GameObject text;
     public GameObject hText;
     public GameObject pText;
+    public GameObject inputUI;
     timeController tc;
     GameObject residue;
     changeScene cs;
@@ -49,4 +50,20 @@ public class gameManager : MonoBehaviour
         Debug.Log(cs);
         cs.Load2("selectMap");
     }
+
+    public void fire1(){
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        fire2Controller f2c = p.GetComponent<fire2Controller>();
+        f2c.fire1();
+    }
+    public void fire2(){
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        fire2Controller f2c = p.GetComponent<fire2Controller>();
+        f2c.fire22();
+    }
+    public void fire3(){
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        fire2Controller f2c = p.GetComponent<fire2Controller>();
+        f2c.fire3();
+    }        
 }

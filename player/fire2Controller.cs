@@ -50,7 +50,7 @@ public class fire2Controller : MonoBehaviour
         }
 
         if(Input.GetButtonDown("Fire2")) {
-            if(!isFire) {
+/*            if(!isFire) {
                 if(power-power_fire2 >= 0) {
                     power -= power_fire2;
                     isFire = true;
@@ -61,7 +61,8 @@ public class fire2Controller : MonoBehaviour
                 } else {
                     motion.SetBool("isFire",false);
                 }
-            }
+            }*/
+            fire22();
         }
 
         if(Input.GetButtonDown("Fire3")) {
@@ -82,6 +83,7 @@ public class fire2Controller : MonoBehaviour
 
     public void fire1(){
             pController p = GetComponent<pController>();
+            Debug.Log(p);
             theta = (-p.phi+90)*Mathf.PI/180;
             ix = Mathf.Cos(theta);
             iy = Mathf.Sin(theta);
@@ -93,6 +95,22 @@ public class fire2Controller : MonoBehaviour
             b.AddForce(v, ForceMode2D.Impulse);        
             
     }
+    
+    public void fire22() {
+            if(!isFire) {
+                if(power-power_fire2 >= 0) {
+                    power -= power_fire2;
+                    isFire = true;
+                    motion.SetBool("isFire",true);
+                    Invoke("fire2",0.2f);
+                    Invoke("stopFire",0.2f);
+                    slider.value = (float)power/(float)power_max;
+                } else {
+                    motion.SetBool("isFire",false);
+                }
+            }
+    }
+
     public void fire2(){
             pController p = GetComponent<pController>();
             theta = (-p.phi+90)*Mathf.PI/180;
