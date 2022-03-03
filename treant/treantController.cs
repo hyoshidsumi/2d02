@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class treantController : MonoBehaviour
 {
+    public int health;
     public float speed;
     public string ma,ms,md,mw;
     public string mhold, mdhold, mwhold, mahold;
@@ -23,6 +24,7 @@ public class treantController : MonoBehaviour
     int r;
     float time;
     pController p;
+    public GameObject arrowPrefab;
 
     void Start()
     {
@@ -45,13 +47,20 @@ public class treantController : MonoBehaviour
             float dy = ppos.y - transform.position.y;
             float rad = Mathf.Atan2(dy, dx);
             float angle = rad * Mathf.Rad2Deg;
-            Quaternion r = Quaternion.Euler(0, 0, angle);
+            Quaternion r = Quaternion.Euler(0, 0, angle-90);
             float bx = Mathf.Cos(rad);
             float by = Mathf.Sin(rad);
-            Vector3 b = new Vector3(bx, by) * 9.0f;
+            Vector3 b = new Vector3(bx, by) * 14.0f;
+
+            isFire = true;
+            GameObject arrow = Instantiate(arrowPrefab, transform.position, r);
+            Rigidbody2D barrow = arrow.GetComponent<Rigidbody2D>();
+            barrow.AddForce(b, ForceMode2D.Impulse);        
+            Invoke("stopFire",0.4f);
+
         }
 
-        Debug.Log(dist);
+//        Debug.Log(dist);
 
         //move
         time += Time.deltaTime;

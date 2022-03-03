@@ -59,7 +59,7 @@ public class gameManager : MonoBehaviour
     public void fire2(){
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         fire2Controller f2c = p.GetComponent<fire2Controller>();
-        f2c.fire22();
+        f2c.fire2();
     }
     public void fire3(){
         GameObject p = GameObject.FindGameObjectWithTag("Player");
