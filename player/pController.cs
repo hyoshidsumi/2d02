@@ -41,8 +41,30 @@ public class pController : MonoBehaviour
 
     void Update()
     {
-            ix = Input.GetAxisRaw("Horizontal");
-            iy = Input.GetAxisRaw("Vertical");
+        Vector2 direction = new Vector2(0,0);
+
+        if(Input.touchCount > 0) {
+            Touch touch = Input.GetTouch(0);
+            float ix = touch.deltaPosition.x;
+            float iy = touch.deltaPosition.y;
+            direction = new Vector2(ix,iy).normalized;
+            if(ix!=0.0f){
+                ix=ix/Mathf.Abs(ix);
+            Debug.Log(touch + " " + Input.touchCount + " " + ix.ToString() + " "  + iy.ToString());
+
+            }
+            if(iy!=0.0f){
+                iy=iy/Mathf.Abs(iy);
+            Debug.Log(touch + " " + Input.touchCount + " " + ix.ToString() + " "  + iy.ToString());
+
+            }
+            
+        } else {
+//            Debug.Log("a");
+        }
+
+//            ix = Input.GetAxisRaw("Horizontal");
+//            iy = Input.GetAxisRaw("Vertical");
             switch(iy) {
                 case 1: 
                     motionName = mw;
@@ -63,6 +85,7 @@ public class pController : MonoBehaviour
                 default:
                 switch(ix) {
                     case 1: 
+                    Debug.Log("iy");
                         motionName = md;
                         transform.localScale = new Vector3(11,11,1);       
                         phi = 0;
