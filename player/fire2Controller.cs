@@ -15,7 +15,7 @@ public class fire2Controller : MonoBehaviour
     public bool isPower = true;
     timeController tc;
     pController p;
-    bool isFire = false, isFire3 = false;
+    bool isFire = false, isFire3 = false, isFire3bomb;
     public Animator motion;
     float radius,theta,larrow=0.3f;
     float ix, iy;
@@ -74,14 +74,14 @@ public class fire2Controller : MonoBehaviour
             }
     }    
     public void fire3(){
-            if(isFire3) {
-            isFire = false;
+            if(isFire3bomb) {
             isFire3 = false;
+            isFire3bomb = false;
             bomb3main();
         } else {
-            if(!isFire) {
+            if(!isFire3) {
+                isFire3bomb = true;
                 isFire3 = true;
-                isFire = true;
                 Invoke("fire3main",0.2f);
             }
         }
@@ -129,12 +129,14 @@ public class fire2Controller : MonoBehaviour
         GameObject arrow = Instantiate(arrow2Prefab, transform.position, Quaternion.Euler(0,0,-p.phi));
         Rigidbody2D b = arrow.GetComponent<Rigidbody2D>();
         Vector3 v = new Vector3(Mathf.Cos(theta),Mathf.Sin(theta))*speed;
-        b.AddForce(v, ForceMode2D.Impulse);             
+        b.AddForce(v, ForceMode2D.Impulse);
     }
     void bomb3main(){
-        GameObject arrow = GameObject.FindGameObjectWithTag("bomb");
-        GameObject bomb = Instantiate(bombPrefab, arrow.transform.position, Quaternion.identity);
-        Destroy(arrow);
+        GameObject[] arrows = GameObject.FindGameObjectsWithTag("bomb");
+        foreach(GameObject arrow in arrows) {
+            GameObject bomb = Instantiate(bombPrefab, arrow.transform.position, Quaternion.identity);
+            Destroy(arrow);
+        }
     }
 
 

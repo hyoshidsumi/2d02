@@ -22,7 +22,7 @@ public class camera : MonoBehaviour
     private float _mouseSensitive = 90.0f;
 
     //カメラ操作の有効無効
-    private bool _cameraMoveActive = true;
+    private bool _cameraMoveActive = false;
     //カメラのtransform  
     private Transform _camTransform;
     //マウスの始点 
