@@ -8,21 +8,18 @@ public class nameController : MonoBehaviour
     public GameObject canvasConfirm;
     void Start()
     {
-        Debug.Log("c");
         string name=PlayerPrefs.GetString("name");
         if(name=="") {
-            Debug.Log("a");
         }else{
-            Debug.Log("b");
         }
-        PlayerPrefs.SetString("b","b");
-        
         canvasConfirm.SetActive(false);
     }
 
     void Update()
     {
-        
+
+        Debug.Log(transform.Find("Panel").gameObject);
+
     }
 
 

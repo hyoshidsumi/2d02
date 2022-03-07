@@ -11,17 +11,16 @@ public class confirmNameController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
     public void confirmName(){
-        Debug.Log("aae");
         canvas.SetActive(true);
     }
 
     public void cancel(){
-        gameObject.SetActive(false);
+        transform.parent.parent.gameObject.SetActive(false);
+        
     }
 }
