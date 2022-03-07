@@ -45,26 +45,20 @@ public class pController : MonoBehaviour
 
         if(Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
-            float ix = touch.deltaPosition.x;
-            float iy = touch.deltaPosition.y;
-            direction = new Vector2(ix,iy).normalized;
+            ix = touch.deltaPosition.x;
+            iy = touch.deltaPosition.y;
             if(ix!=0.0f){
                 ix=ix/Mathf.Abs(ix);
-            Debug.Log(touch + " " + Input.touchCount + " " + ix.ToString() + " "  + iy.ToString());
-
             }
             if(iy!=0.0f){
                 iy=iy/Mathf.Abs(iy);
-            Debug.Log(touch + " " + Input.touchCount + " " + ix.ToString() + " "  + iy.ToString());
-
             }
             
         } else {
-//            Debug.Log("a");
+            ix = Input.GetAxisRaw("Horizontal");
+            iy = Input.GetAxisRaw("Vertical");
         }
 
-//            ix = Input.GetAxisRaw("Horizontal");
-//            iy = Input.GetAxisRaw("Vertical");
             switch(iy) {
                 case 1: 
                     motionName = mw;
@@ -153,8 +147,10 @@ public class pController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        rbody.velocity = new Vector2(ix*speed, iy*speed);
+//        if(ix!=0.0f || iy!=0.0f){
+Debug.Log(ix + " " + iy);
+//        }
+        rbody.velocity = new Vector2(ix, iy) * speed;
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
