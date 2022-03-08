@@ -27,6 +27,7 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
+        transform.Find("pStatus").Find("lName").GetComponent<Text>().text=PlayerPrefs.GetString("name");
 
         GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
         if(trees.Length == 0) {
@@ -47,7 +48,6 @@ public class gameManager : MonoBehaviour
 
     void menu() {
         cs = GetComponent<changeScene>();
-        Debug.Log(cs);
         cs.Load2("selectMap");
     }
 

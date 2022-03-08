@@ -61,6 +61,14 @@ public class camera : MonoBehaviour
 
     void Update()
     {
+        if(Input.touchCount>0||Input.GetButtonDown("Fire1")||Input.GetButtonDown("Fire2")||Input.GetButtonDown("Fire3")) {
+            Vector3 cpos;
+            cpos.x = _camTransform.position.x;
+            cpos.y = -2.0f;
+            cpos.z = 0.0f;
+            _camTransform.position = cpos;
+            showTitle();
+        }
 
         Vector3 v2 = new Vector3(0,0.01f,0);
         if(_camTransform.position.y < -2.0f) {

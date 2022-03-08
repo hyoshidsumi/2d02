@@ -46,14 +46,17 @@ public class pController : MonoBehaviour
         if(Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
             ix = touch.deltaPosition.x;
+            if(ix>0){
+                ix = 1;
+            } else if(ix<0) {
+                ix = -1;
+            } 
             iy = touch.deltaPosition.y;
-            if(ix!=0.0f){
-                ix=ix/Mathf.Abs(ix);
+            if(iy>0){
+                iy = 1;
+            } else if(iy<0) {
+                iy = -1;
             }
-            if(iy!=0.0f){
-                iy=iy/Mathf.Abs(iy);
-            }
-            
         } else {
             ix = Input.GetAxisRaw("Horizontal");
             iy = Input.GetAxisRaw("Vertical");
@@ -79,7 +82,6 @@ public class pController : MonoBehaviour
                 default:
                 switch(ix) {
                     case 1: 
-                    Debug.Log("iy");
                         motionName = md;
                         transform.localScale = new Vector3(11,11,1);       
                         phi = 0;
@@ -148,7 +150,6 @@ public class pController : MonoBehaviour
     private void FixedUpdate()
     {
 //        if(ix!=0.0f || iy!=0.0f){
-Debug.Log(ix + " " + iy);
 //        }
         rbody.velocity = new Vector2(ix, iy) * speed;
     }

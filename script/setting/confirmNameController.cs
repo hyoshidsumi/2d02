@@ -10,7 +10,6 @@ public class confirmNameController : MonoBehaviour
     {
         
     }
-
     void Update()
     {
         
@@ -30,6 +29,6 @@ public class confirmNameController : MonoBehaviour
     public void registerName()
     {
         PlayerPrefs.SetString("name", transform.parent.Find("lName").gameObject.GetComponent<Text>().text);
-        GetComponent<changeScene>().Load2("pancreas");
+        GetComponent<changeScene>().Load2("selectMap");
     }
 }
