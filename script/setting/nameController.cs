@@ -8,18 +8,29 @@ public class nameController : MonoBehaviour
     public GameObject canvasConfirm;
     void Start()
     {
-        string name=PlayerPrefs.GetString("name");
+        string name = PlayerPrefs.GetString("name");
+        Debug.Log(name);
         if(name=="") {
         }else{
+            transform.Find("Panel").Find("bg").Find("tbName").Find("Text").gameObject.GetComponent<Text>().text = name;
         }
+        transform.Find("Panel").Find("bg").Find("bName").gameObject.GetComponent<Button>().interactable = false;
+
         canvasConfirm.SetActive(false);
+
+
     }
 
     void Update()
     {
-
-        Debug.Log(transform.Find("Panel").gameObject);
-
+        if (transform.Find("Panel").Find("bg").Find("tbName").Find("Text").gameObject.GetComponent<Text>().text != "")
+        {
+            transform.Find("Panel").Find("bg").Find("bName").gameObject.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            transform.Find("Panel").Find("bg").Find("bName").gameObject.GetComponent<Button>().interactable = false;
+        }
     }
 
 

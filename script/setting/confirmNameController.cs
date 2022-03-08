@@ -16,11 +16,20 @@ public class confirmNameController : MonoBehaviour
         
     }
     public void confirmName(){
-        canvas.SetActive(true);
+        string name = transform.parent.Find("tbName").Find("Text").gameObject.GetComponent<Text>().text;
+        if (name != "") {
+            canvas.SetActive(true);
+        }
+        canvas.transform.Find("bg").Find("lName").gameObject.GetComponent<Text>().text = name;
     }
 
     public void cancel(){
         transform.parent.parent.gameObject.SetActive(false);
-        
+    }
+
+    public void registerName()
+    {
+        PlayerPrefs.SetString("name", transform.parent.Find("lName").gameObject.GetComponent<Text>().text);
+        GetComponent<changeScene>().Load2("pancreas");
     }
 }

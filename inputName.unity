@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 408634680}
   - component: {fileID: 408634679}
   m_Layer: 5
-  m_Name: Button
+  m_Name: bName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,6 +860,8 @@ GameObject:
   - component: {fileID: 730721689}
   - component: {fileID: 730721688}
   - component: {fileID: 730721691}
+  - component: {fileID: 730721692}
+  - component: {fileID: 730721693}
   m_Layer: 5
   m_Name: bYes
   m_TagString: Untagged
@@ -931,9 +933,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 730721691}
-        m_TargetAssemblyTypeName: changeScene, Assembly-CSharp
-        m_MethodName: Load
+      - m_Target: {fileID: 730721693}
+        m_TargetAssemblyTypeName: confirmNameController, Assembly-CSharp
+        m_MethodName: registerName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -995,6 +997,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: selectMap
   test: aaa
+--- !u!114 &730721692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730721686}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfe2ecfb234b4583bc96355c2c3b9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasConfirm: {fileID: 0}
+--- !u!114 &730721693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730721686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de56b7e36d2fb4f3fa8553d0aabefa97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
 --- !u!1 &956021707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,7 +1119,7 @@ GameObject:
   - component: {fileID: 1321677953}
   - component: {fileID: 1321677952}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: tbName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1585,7 +1613,7 @@ GameObject:
   - component: {fileID: 1774694228}
   - component: {fileID: 1774694227}
   m_Layer: 5
-  m_Name: map1
+  m_Name: iHero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1705,7 +1733,7 @@ GameObject:
   - component: {fileID: 1849595902}
   - component: {fileID: 1849595901}
   m_Layer: 5
-  m_Name: map1
+  m_Name: iHero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1719,7 +1747,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849595899}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -886.2099}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1725579051}
@@ -1727,7 +1755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 120}
+  m_AnchoredPosition: {x: 1.2127736, y: -129.829}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1849595901
@@ -1979,7 +2007,7 @@ GameObject:
   - component: {fileID: 2114782878}
   - component: {fileID: 2114782877}
   m_Layer: 5
-  m_Name: Text
+  m_Name: lName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
