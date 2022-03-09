@@ -46,22 +46,80 @@ public class pController : MonoBehaviour
         if(Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
             ix = touch.deltaPosition.x;
+            iy = touch.deltaPosition.y;
+            speed = 2.0f;
+            if(Mathf.Abs(ix) < 4.0f) {
+                ix = 0.0f;
+            }
+            if(Mathf.Abs(iy) < 4.0f) {
+                iy = 0.0f;
+            }
+/*            
             if(ix>0){
                 ix = 1;
             } else if(ix<0) {
                 ix = -1;
             } 
-            iy = touch.deltaPosition.y;
             if(iy>0){
                 iy = 1;
             } else if(iy<0) {
                 iy = -1;
             }
+*/            
         } else {
             ix = Input.GetAxisRaw("Horizontal");
             iy = Input.GetAxisRaw("Vertical");
         }
 
+        if(iy > 0.0f) {
+            motionName = mw;
+            if(ix > iy) {
+                phi = 45;
+            } else if(-ix > iy) {
+                phi = -45;
+            } else {
+                phi = 90;
+            }
+        } else if(iy < 0.0f) {
+            motionName = ms;
+            if(ix > -iy) {
+                phi = 135;
+            } else if(ix < iy) {
+                phi = -135;
+            } else {
+                phi = 180;
+            }
+        } else {
+            if(ix > 0.0f) {
+                motionName = md;
+                transform.localScale = new Vector3(11,11,1);
+                phi = 0;
+                isLeft = false;
+            } else if(ix < 0.0f) {
+                motionName = md;
+                transform.localScale = new Vector3(-11,11,1);
+                phi = -90;
+                isLeft = true;                
+            } else {
+                if((lastMotion=="md")||(lastMotion=="mdhold")) {
+                    motionName = mdhold;
+                    if(isLeft == false) {
+                        phi = 90;
+                    } else {
+                        transform.localScale = new Vector3(-11,11,1);
+                        phi = -90;
+                    }
+                } else if((lastMotion=="mw")||(lastMotion=="mwhold")) {
+                    motionName = mwhold;
+                    phi = 0;
+                } else {
+                    motionName = mhold;
+                    phi = 180;
+                }
+            }
+        }
+
+/*        
             switch(iy) {
                 case 1: 
                     motionName = mw;
@@ -113,33 +171,12 @@ public class pController : MonoBehaviour
                 }
                 break;
             }
-            
-            ir = Input.GetButtonDown("Fire3");
-            if(ir == true) {
-                if(isFire == false) {
-                    isFire = true;
-                    switch(phi) {
-                        case 0:
-                        GetComponent<Animator>().Play("wfire"); break;
-                        case 45:
-                        GetComponent<Animator>().Play("wfire"); break;
-                        case -45:
-                        GetComponent<Animator>().Play("wfire"); break;
-                        case 90:
-                        GetComponent<Animator>().Play("dfire"); break;
-                        case -90:
-                        GetComponent<Animator>().Play("dfire"); break;
-                        default :
-                        GetComponent<Animator>().Play("sfire"); break;
-                    }
-                    Invoke("stopFire",0.0f);
-                }
-            }
+*/
 
-            if(motionName != lastMotion) {
-                motion.Play(motionName);
-                lastMotion = motionName;
-            }
+        if(motionName != lastMotion) {
+            motion.Play(motionName);
+            lastMotion = motionName;
+        }
 
     }
 
