@@ -9,7 +9,6 @@ public class nameController : MonoBehaviour
     void Start()
     {
         string name = PlayerPrefs.GetString("name");
-        Debug.Log(name);
         if(name=="") {
         }else{
             transform.Find("Panel").Find("bg").Find("tbName").Find("Text").gameObject.GetComponent<Text>().text = name;

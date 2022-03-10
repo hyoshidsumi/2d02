@@ -177,8 +177,6 @@ public class treantController : MonoBehaviour
         }
 
         hSlider.value = (float)health / (float)health_max;
-        Debug.Log(health + " " + health_max);
-
 
         if (health < 1)
         {

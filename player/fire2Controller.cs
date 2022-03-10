@@ -20,6 +20,7 @@ public class fire2Controller : MonoBehaviour
     float radius,theta,larrow=0.3f;
     float ix, iy;
     int power;
+    public AudioSource seShoot;
     
     void Start() {
         Vector3 pos = transform.position;
@@ -53,42 +54,45 @@ public class fire2Controller : MonoBehaviour
         }
     }
     public void fire1(){
-                if(!isFire) {
-                isFire = true;
-                Invoke("fire1main",0.2f);
-                Invoke("stopFire",0.2f);
-            }
+        if(!isFire) {
+            isFire = true;
+            soundManager.sm.playSE(se.Arrow);
+            Invoke("fire1main",0.2f);
+            Invoke("stopFire",0.2f);
+        }
     }
     public void fire2() {
-            if(!isFire) {
-                if(power-power_fire2 >= 0) {
-                    power -= power_fire2;
-                    isFire = true;
-                    motion.SetBool("isFire",true);
-                    Invoke("fire2main",0.2f);
-                    Invoke("stopFire",0.2f);
-                    slider.value = (float)power/(float)power_max;
-                } else {
-                    motion.SetBool("isFire",false);
-                }
+        if(!isFire) {
+            if(power-power_fire2 >= 0) {
+                power -= power_fire2;
+                isFire = true;
+                motion.SetBool("isFire",true);
+                soundManager.sm.playSE(se.Arrow);
+                Invoke("fire2main",0.2f);
+                Invoke("stopFire",0.2f);
+                slider.value = (float)power/(float)power_max;
+            } else {
+                motion.SetBool("isFire",false);
             }
+        }
     }    
     public void fire3(){
             if(isFire3bomb) {
             isFire3 = false;
             isFire3bomb = false;
+            soundManager.sm.playSE(se.Bomb);
             bomb3main();
         } else {
             if(!isFire3) {
                 isFire3bomb = true;
                 isFire3 = true;
+                soundManager.sm.playSE(se.ArrowBomb);
                 Invoke("fire3main",0.2f);
             }
         }
     }
     public void fire1main(){
         pController p = GetComponent<pController>();
-        Debug.Log(p);
         theta = (-p.phi+90)*Mathf.PI/180;
         ix = Mathf.Cos(theta);
         iy = Mathf.Sin(theta);
