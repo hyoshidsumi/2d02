@@ -54,4 +54,19 @@ public class gameManager : MonoBehaviour
         cs.Load2("selectMap");
     }
 
+    public void fire1(){
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        fire2Controller f2c = p.GetComponent<fire2Controller>();
+        f2c.fire1();
+    }
+    public void fire2(){
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        fire2Controller f2c = p.GetComponent<fire2Controller>();
+        f2c.fire2();
+    }
+    public void fire3(){
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        fire2Controller f2c = p.GetComponent<fire2Controller>();
+        f2c.fire3();
+    }        
 }

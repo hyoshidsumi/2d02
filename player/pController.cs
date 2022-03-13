@@ -13,7 +13,7 @@ public class pController : MonoBehaviour
     public float phi=180;
     
     Rigidbody2D rbody;
-    public float ix, iy;
+    public float ix, iy, ix0, iy0;
     bool iq, ie, ir;    
 	Animator motion;
     string motionName = "";
@@ -26,6 +26,7 @@ public class pController : MonoBehaviour
     public Slider hSlider;
     gameManager gm;
     changeScene cs;
+    Vector2 tpos = new Vector2(0,0), tpos0 = new Vector2(0,0);    
 
     void Start()
     {
@@ -41,18 +42,49 @@ public class pController : MonoBehaviour
 
     void Update()
     {
-        Vector2 direction = new Vector2(0,0);
 
+
+/*
+        if(Input.touchCount > 0) {
+
+            Touch touch = Input.GetTouch(0);
+
+            if(touch.phase == TouchPhase.Began) {
+                tpos0 = touch.position;
+            } else if(touch.phase == TouchPhase.Stationary) {
+                tpos = touch.position;
+                ix = tpos.x;
+                iy = tpos.y;
+            }            
+            Debug.Log(touch.phase + " " + tpos0.x + " " + touch.position.x);
+*/
+/* previous version touch mode */
         if(Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
-            ix = touch.deltaPosition.x;
-            iy = touch.deltaPosition.y;
-            speed = 2.0f;
-            if(Mathf.Abs(ix) < 4.0f) {
-                ix = 0.0f;
-            }
-            if(Mathf.Abs(iy) < 4.0f) {
-                iy = 0.0f;
+                if(touch.position.x < Screen.width * 3.0f / 5.0f) {
+                speed = 11.0f;
+
+                if(touch.phase == TouchPhase.Stationary) {
+                    ix = ix0;
+                    iy = iy0;
+                } else if(touch.phase == TouchPhase.Moved) {
+                    ix = touch.deltaPosition.x;
+                    iy = touch.deltaPosition.y;
+                    if(Mathf.Abs(ix) < 4.0f) {
+                        ix = 0.0f;
+                    } else {
+                        ix = ix / Mathf.Abs(ix);
+                    }
+                    if(Mathf.Abs(iy) < 4.0f) {
+                        iy = 0.0f;
+                    } else {
+                        iy = iy / Mathf.Abs(iy);
+                    }
+                    if(Mathf.Abs(ix)>0 || Mathf.Abs(iy)>0) {
+                        ix0 = ix;
+                        iy0 = iy;
+                    }
+                }
             }
 /*            
             if(ix>0){
@@ -69,6 +101,8 @@ public class pController : MonoBehaviour
         } else {
             ix = Input.GetAxisRaw("Horizontal");
             iy = Input.GetAxisRaw("Vertical");
+            ix = 0.0f;
+            iy = 0.0f;
         }
 
         if(iy > 0.0f) {

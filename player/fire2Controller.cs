@@ -92,12 +92,13 @@ public class fire2Controller : MonoBehaviour
         }
     }
     public void fire1main(){
-        pController p = GetComponent<pController>();
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        pController p = go.GetComponent<pController>();
         theta = (-p.phi+90)*Mathf.PI/180;
         ix = Mathf.Cos(theta);
         iy = Mathf.Sin(theta);
 
-        GameObject arrow = Instantiate(arrowPrefab, transform.position, Quaternion.Euler(0,0,-p.phi));
+        GameObject arrow = Instantiate(arrowPrefab, go.transform.position, Quaternion.Euler(0,0,-p.phi));
         Rigidbody2D b = arrow.GetComponent<Rigidbody2D>();
 
         Vector3 v = new Vector3(Mathf.Cos(theta),Mathf.Sin(theta))*speed;
@@ -105,11 +106,13 @@ public class fire2Controller : MonoBehaviour
             
     }
     void fire2main(){
-        pController p = GetComponent<pController>();
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        pController p = go.GetComponent<pController>();
         theta = (-p.phi+90)*Mathf.PI/180;
         ix = Mathf.Cos(theta);
         iy = Mathf.Sin(theta);
-        Vector3 pos = transform.position;
+        Vector3 pos = go.transform.position;
+        Debug.Log(pos);
         pos.x += larrow * ix;
         pos.y += larrow * iy;
             
@@ -126,11 +129,12 @@ public class fire2Controller : MonoBehaviour
     }
 
     public void fire3main(){
-        pController p = GetComponent<pController>();
+        GameObject go = GameObject.FindGameObjectWithTag("Player");        
+        pController p = go.GetComponent<pController>();
         theta = (-p.phi+90)*Mathf.PI/180;
         ix = Mathf.Cos(theta);
         iy = Mathf.Sin(theta);
-        GameObject arrow = Instantiate(arrow2Prefab, transform.position, Quaternion.Euler(0,0,-p.phi));
+        GameObject arrow = Instantiate(arrow2Prefab, go.transform.position, Quaternion.Euler(0,0,-p.phi));
         Rigidbody2D b = arrow.GetComponent<Rigidbody2D>();
         Vector3 v = new Vector3(Mathf.Cos(theta),Mathf.Sin(theta))*speed;
         b.AddForce(v, ForceMode2D.Impulse);
