@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class pController : MonoBehaviour
+public class pController : Photon.MonoBehaviour
 {
     public float speed;
     public string ma,ms,md,mw;
@@ -99,10 +101,10 @@ public class pController : MonoBehaviour
             }
 */            
         } else {
-            ix = Input.GetAxisRaw("Horizontal");
-            iy = Input.GetAxisRaw("Vertical");
             ix = 0.0f;
             iy = 0.0f;
+            ix = Input.GetAxisRaw("Horizontal");
+            iy = Input.GetAxisRaw("Vertical");
         }
 
         if(iy > 0.0f) {
