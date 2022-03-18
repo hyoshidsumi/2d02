@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class pController : Photon.MonoBehaviour
+public class pController : MonoBehaviour
 {
     public float speed;
     public string ma,ms,md,mw;
@@ -20,7 +20,6 @@ public class pController : Photon.MonoBehaviour
 	Animator motion;
     string motionName = "";
     string lastMotion = "";
-//    string fireName = "";
     bool isFire = false;
     bool isLeft;
     int health;
