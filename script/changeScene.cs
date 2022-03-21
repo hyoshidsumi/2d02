@@ -9,13 +9,11 @@ public class changeScene : MonoBehaviour
     public string sceneName;
     public string test="aaa";
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -28,5 +26,10 @@ public class changeScene : MonoBehaviour
 
     public void Load2(string scene) {
         SceneManager.LoadScene(scene);
+    }
+
+    public void Close() {
+        Debug.Log(transform.parent.parent);
+        transform.parent.gameObject.SetActive(false);
     }
 }

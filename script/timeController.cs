@@ -14,12 +14,14 @@ public class timeController : MonoBehaviour
 
     void Start()
     {
-        time = (float)PlayerPrefs.GetFloat("time");
+        timer = this.transform.Find("timer").Find("timerText").gameObject;
+        time = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if(isCount) { 
             time += Time.deltaTime;
             if((int)time%4 == 0) {
@@ -35,7 +37,7 @@ public class timeController : MonoBehaviour
             itime = (int)time;
             timer.GetComponent<Text>().text = itime.ToString();            
         } else {
-            PlayerPrefs.SetFloat("time",(float)itime);
+            PlayerPrefs.SetInt("time",itime);
         }
 
     }

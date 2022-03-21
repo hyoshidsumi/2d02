@@ -2,34 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class fire2Controller : MonoBehaviour
+public class fire2Controller : Photon.Pun.MonoBehaviourPun
 {
     public float speed = 11.0f;
     public GameObject arrowPrefab, arrow2Prefab, bombPrefab;
-    public Slider slider;
+    Slider slider;
     public bool isGetButtonDown;
     public int power_max = 100;
     public int power_fire1 = 8;
     public int power_fire2 = 40;
     public bool isPower = true;
-    timeController tc;
-    pController p;
     bool isFire = false, isFire3 = false, isFire3bomb;
     public Animator motion;
     float radius,theta,larrow=0.3f;
     float ix, iy;
     int power;
     public AudioSource seShoot;
+    GameObject gc;
+    timeController tc;
+    pController p;
     
     void Start() {
         Vector3 pos = transform.position;
         power = power_max;
+        p = GetComponent<pController>();
+        gc = GameObject.FindGameObjectWithTag("GameController");
+        slider = gc.transform.Find("pStatus").Find("pSlider").GetComponent<Slider>();
     }
 
     void Update()  {
-        pController p = GetComponent<pController>();
-        GameObject gc = GameObject.FindGameObjectWithTag("GameController");
         tc = gc.GetComponent<timeController>();
         tc.isCount = true;
 
@@ -92,6 +96,8 @@ public class fire2Controller : MonoBehaviour
         }
     }
     public void fire1main(){
+        if(!photonView.IsMine) return;
+
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         pController p = go.GetComponent<pController>();
         theta = (-p.phi+90)*Mathf.PI/180;
@@ -106,13 +112,14 @@ public class fire2Controller : MonoBehaviour
             
     }
     void fire2main(){
+        if(!photonView.IsMine) return;
+
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         pController p = go.GetComponent<pController>();
         theta = (-p.phi+90)*Mathf.PI/180;
         ix = Mathf.Cos(theta);
         iy = Mathf.Sin(theta);
         Vector3 pos = go.transform.position;
-        Debug.Log(pos);
         pos.x += larrow * ix;
         pos.y += larrow * iy;
             

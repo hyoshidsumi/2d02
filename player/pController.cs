@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class pController : MonoBehaviour
+public class pController : Photon.Pun.MonoBehaviourPun
 {
     public float speed;
     public string ma,ms,md,mw;
@@ -24,9 +24,7 @@ public class pController : MonoBehaviour
     bool isLeft;
     int health;
     public int health_max;
-    public Slider hSlider;
-    gameManager gm;
-    changeScene cs;
+    GameObject gc;
     Vector2 tpos = new Vector2(0,0), tpos0 = new Vector2(0,0);    
 
     void Start()
@@ -36,30 +34,12 @@ public class pController : MonoBehaviour
         motionName = mhold;
         lastMotion = mhold;
         health = health_max;
-        GameObject gc = GameObject.FindGameObjectWithTag("GameController");
-        gm = gc.GetComponent<gameManager>();
-        cs = gc.GetComponent<changeScene>();
+        gc = GameObject.FindGameObjectWithTag("GameController");
     }
 
     void Update()
     {
-
-
-/*
-        if(Input.touchCount > 0) {
-
-            Touch touch = Input.GetTouch(0);
-
-            if(touch.phase == TouchPhase.Began) {
-                tpos0 = touch.position;
-            } else if(touch.phase == TouchPhase.Stationary) {
-                tpos = touch.position;
-                ix = tpos.x;
-                iy = tpos.y;
-            }            
-            Debug.Log(touch.phase + " " + tpos0.x + " " + touch.position.x);
-*/
-/* previous version touch mode */
+        if(!photonView.IsMine) return;
         if(Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
                 if(touch.position.x < Screen.width * 3.0f / 5.0f) {
@@ -87,18 +67,6 @@ public class pController : MonoBehaviour
                     }
                 }
             }
-/*            
-            if(ix>0){
-                ix = 1;
-            } else if(ix<0) {
-                ix = -1;
-            } 
-            if(iy>0){
-                iy = 1;
-            } else if(iy<0) {
-                iy = -1;
-            }
-*/            
         } else {
             ix = 0.0f;
             iy = 0.0f;
@@ -221,18 +189,21 @@ public class pController : MonoBehaviour
 
     private void FixedUpdate()
     {
-//        if(ix!=0.0f || iy!=0.0f){
-//        }
+        if(!photonView.IsMine) return;
         rbody.velocity = new Vector2(ix, iy) * speed;
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
+        if(!photonView.IsMine) return;
+        gameManager gm = gc.GetComponent<gameManager>();
+        
         health -= 10;
         if(health < 0) {
             health = 0;
-            gm.clear();
-//            cs.Load2("pancreas");
+            gm.fail();
         }
+        
+        Slider hSlider = gc.transform.Find("pStatus").Find("hSlider").GetComponent<Slider>();
         hSlider.value = (float)health/(float)health_max;
         gm.hText.GetComponent<Text>().text = health.ToString();
     }

@@ -10,9 +10,15 @@ public class cellController : MonoBehaviour
     public float dpos;
     public int hp;
     public int tree_max;    
+    public int nDestroy;
     bool isMultiple = false;
+    GameObject gc;
+    gameManager gm;
      void Start()
     {
+        gc = GameObject.FindGameObjectWithTag("GameController");
+        gm = gc.GetComponent<gameManager>();
+
     }
     void Update()
     {
@@ -46,7 +52,9 @@ public class cellController : MonoBehaviour
         hp--;
         if(hp < 0) {
             GameObject effect_extinct = Instantiate(extinctPrefab,transform.position,Quaternion.identity);            
-            Destroy(gameObject);
+            Destroy(gameObject);   
+            Debug.Log(gm);   
+            gm.addDestroy();
         }
     }
 }
