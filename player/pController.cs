@@ -23,6 +23,7 @@ public class pController : Photon.Pun.MonoBehaviourPun
     bool isFire = false;
     bool isLeft;
     int health;
+    bool isDamage = false;
     public int health_max;
     GameObject gc;
     Vector2 tpos = new Vector2(0,0), tpos0 = new Vector2(0,0);    
@@ -196,6 +197,9 @@ public class pController : Photon.Pun.MonoBehaviourPun
     void OnTriggerEnter2D(Collider2D collision) {
         if(!photonView.IsMine) return;
         gameManager gm = gc.GetComponent<gameManager>();
+
+        if(isDamage) return;
+        isDamage = true;
         
         health -= 10;
         if(health < 0) {
@@ -206,5 +210,13 @@ public class pController : Photon.Pun.MonoBehaviourPun
         Slider hSlider = gc.transform.Find("pStatus").Find("hSlider").GetComponent<Slider>();
         hSlider.value = (float)health/(float)health_max;
         gm.hText.GetComponent<Text>().text = health.ToString();
+
+        StartCoroutine(onDamage());
+
+    }
+
+    public IEnumerator onDamage() {
+        yield return new WaitForSeconds(1.5f);
+        isDamage = false;
     }
 }
