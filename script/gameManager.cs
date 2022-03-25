@@ -14,21 +14,23 @@ public class gameManager : MonoBehaviour
     public GameObject pText;
     public GameObject inputUI;
     timeController tc;
-    GameObject residue;
+    public GameObject residue;
     changeScene cs;
     int nDestroy;
+    int nCoin;
 
     void Start()
     {
         clearUI.SetActive(false);
         failUI.SetActive(false);
         tc = GetComponent<timeController>();
-        text.GetComponent<Text>().text = PlayerPrefs.GetString("b");
-        residue = GameObject.FindGameObjectWithTag("residue");
+//        text.GetComponent<Text>().text = PlayerPrefs.GetString("b");
+//        residue = GameObject.FindGameObjectWithTag("residue");
         nDestroy = 0;
 
         soundManager.sm.playBGM();
 
+//debug—p
 //        PlayerPrefs.SetInt("bestTime",100);
 //        PlayerPrefs.SetInt("bestScore",0);        
     }
@@ -38,24 +40,27 @@ public class gameManager : MonoBehaviour
         transform.Find("pStatus").Find("lName").GetComponent<Text>().text=PlayerPrefs.GetString("name");
 
         GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
-//        if(trees.Length == 0) {
-        if(trees.Length < 5) {
+        if(trees.Length == 0) {
+//        if(trees.Length < 5) { //for Debug (clear stage)
 
             if(clearUI.activeSelf == false) {
                 clear();
             }
         }
-        residue.GetComponent<Text>().text = trees.Length.ToString();
-        
-        if(Input.GetButtonDown("Cancel")){
+//debug        residue.GetComponent<Text>().text = trees.Length.ToString();
+        residue.GetComponent<Text>().text = (nCoin*100).ToString();
+
+        if (Input.GetButtonDown("Cancel")){
             menu();
         }
     }
-    public async void addDestroy() {
+    public void addDestroy() {
         nDestroy++;
-        Debug.Log(nDestroy);
     }
-    public async void clear() {
+    public void addCoin() {
+        nCoin++;
+    }
+    public void clear() {
         clearUI.SetActive(true);
         tc.isCount = false;
         soundManager.sm.playSE(se.Clear);

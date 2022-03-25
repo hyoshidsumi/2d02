@@ -30,6 +30,7 @@ public class pController : Photon.Pun.MonoBehaviourPun
 
     public SpriteRenderer sp;
     float sumTime = 0f;
+    public int nCoin;
 
     void Start()
     {
@@ -260,21 +261,27 @@ public class pController : Photon.Pun.MonoBehaviourPun
         if(!photonView.IsMine) return;
         gameManager gm = gc.GetComponent<gameManager>();
 
-        if(isDamage) return;
-        isDamage = true;
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "coin") {
+            Debug.Log("b");
+            nCoin++;
+            Destroy(collision.gameObject, 0f);
+        } else {
+            if (isDamage) return;
+            isDamage = true;
 
-        health -= 10;
-        if(health < 0) {
-            health = 0;
-            gm.fail();
+            health -= 10;
+            if (health < 0) {
+                health = 0;
+                gm.fail();
+            }
+
+            Slider hSlider = gc.transform.Find("pStatus").Find("hSlider").GetComponent<Slider>();
+            hSlider.value = (float)health / (float)health_max;
+            gm.hText.GetComponent<Text>().text = health.ToString();
+
+            StartCoroutine(onDamage());
         }
-        
-        Slider hSlider = gc.transform.Find("pStatus").Find("hSlider").GetComponent<Slider>();
-        hSlider.value = (float)health/(float)health_max;
-        gm.hText.GetComponent<Text>().text = health.ToString();
-
-        StartCoroutine(onDamage());
-
     }
 
     public IEnumerator onDamage() {

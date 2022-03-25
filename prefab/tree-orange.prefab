@@ -137,6 +137,8 @@ MonoBehaviour:
   dt_metastasis: 2
   cellPrefab: {fileID: 8555037793314105475}
   extinctPrefab: {fileID: 8239464048701126938, guid: a5c6d1cadfc0b4272a4e73fbe3fbe863, type: 3}
+  coinPrefab: {fileID: 4271572930127861950, guid: aeab3226e383c05499f1f4e06921efd8, type: 3}
   dpos: 3
   hp: 2
   tree_max: 40
+  nDestroy: 0

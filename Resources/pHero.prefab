@@ -126,7 +126,8 @@ MonoBehaviour:
   iy: 0
   ix0: 0
   iy0: 0
-  health_max: 0
+  health_max: 100
+  sp: {fileID: 0}
 --- !u!114 &2084537225599175253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084537225599175250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b4c9e8aeed20484a8dce6d312f6f5f7, type: 3}
   m_Name: 

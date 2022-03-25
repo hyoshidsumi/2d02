@@ -116,9 +116,11 @@ MonoBehaviour:
   dt_metastasis: 2
   cellPrefab: {fileID: 2510967279503549107}
   extinctPrefab: {fileID: 8239464048701126938, guid: a5c6d1cadfc0b4272a4e73fbe3fbe863, type: 3}
+  coinPrefab: {fileID: 4271572930127861950, guid: aeab3226e383c05499f1f4e06921efd8, type: 3}
   dpos: 3
   hp: 4
   tree_max: 10
+  nDestroy: 0
 --- !u!50 &8375404655361616994
 Rigidbody2D:
   serializedVersion: 4
