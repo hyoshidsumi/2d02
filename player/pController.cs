@@ -261,10 +261,9 @@ public class pController : Photon.Pun.MonoBehaviourPun
         if(!photonView.IsMine) return;
         gameManager gm = gc.GetComponent<gameManager>();
 
-        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "coin") {
-            Debug.Log("b");
-            nCoin++;
+            //nCoin++;
+            gm.addCoin();
             Destroy(collision.gameObject, 0f);
         } else {
             if (isDamage) return;

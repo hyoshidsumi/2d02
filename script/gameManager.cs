@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     public GameObject residue;
     changeScene cs;
     int nDestroy;
-    int nCoin;
+    public int nCoin;
 
     void Start()
     {
@@ -30,15 +30,17 @@ public class gameManager : MonoBehaviour
 
         soundManager.sm.playBGM();
 
-//debug—p
-//        PlayerPrefs.SetInt("bestTime",100);
-//        PlayerPrefs.SetInt("bestScore",0);        
+        //debug—p
+        //        PlayerPrefs.SetInt("bestTime",100);
+        //        PlayerPrefs.SetInt("bestScore",0);        
+
+        transform.Find("myName").gameObject.GetComponent<Text>().text = PlayerPrefs.GetString("name");
+        transform.Find("pStatus").Find("lName").GetComponent<Text>().text = PlayerPrefs.GetString("name");
+
     }
 
     void Update()
     {
-        transform.Find("pStatus").Find("lName").GetComponent<Text>().text=PlayerPrefs.GetString("name");
-
         GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
         if(trees.Length == 0) {
 //        if(trees.Length < 5) { //for Debug (clear stage)
@@ -59,6 +61,9 @@ public class gameManager : MonoBehaviour
     }
     public void addCoin() {
         nCoin++;
+        transform.Find("inputUI").Find("bPortion").Find("Text").GetComponent<Text>().text = nCoin.ToString();
+        Debug.Log(transform.Find("inputUI").Find("bPortion").Find("Text").GetComponent<Text>().text);
+        Debug.Log("nCoin: " + nCoin.ToString());
     }
     public void clear() {
         clearUI.SetActive(true);
