@@ -56,6 +56,8 @@ public class fire2Controller : Photon.Pun.MonoBehaviourPun
         if(Input.GetButtonDown("Fire3")) {
             fire3();
         }
+
+        gc.transform.Find("pStatus").Find("power").GetComponent<Text>().text = power.ToString();
     }
     public void fire1(){
         if(!isFire) {
@@ -157,6 +159,10 @@ public class fire2Controller : Photon.Pun.MonoBehaviourPun
 
     public void stopFire() {
         isFire = false;
+    }
+
+    public void addPower(int n) {
+        power += n;
     }
 
 }

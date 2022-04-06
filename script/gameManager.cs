@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     public GameObject residue;
     changeScene cs;
     int nDestroy;
-    public int nCoin;
+    public int nCoin,nPortion;
 
     void Start()
     {
@@ -61,9 +61,12 @@ public class gameManager : MonoBehaviour
     }
     public void addCoin() {
         nCoin++;
-        transform.Find("inputUI").Find("bPortion").Find("Text").GetComponent<Text>().text = nCoin.ToString();
-        Debug.Log(transform.Find("inputUI").Find("bPortion").Find("Text").GetComponent<Text>().text);
-        Debug.Log("nCoin: " + nCoin.ToString());
+        transform.Find("inputUI").Find("bCoin").Find("Text").GetComponent<Text>().text = nCoin.ToString();
+    }
+    public void addPortion()
+    {
+        nPortion++;
+        transform.Find("inputUI").Find("bPortion").Find("Text").GetComponent<Text>().text = nPortion.ToString();
     }
     public void clear() {
         clearUI.SetActive(true);
@@ -122,5 +125,12 @@ public class gameManager : MonoBehaviour
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         fire2Controller f2c = p.GetComponent<fire2Controller>();
         f2c.fire3();
-    }        
+    }
+    public void coin()
+    {
+        Slider pSlider = transform.Find("pStatus").Find("pSlider").GetComponent<Slider>();
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        fire2Controller fc2 = p.GetComponent<fire2Controller>();
+    }
+
 }

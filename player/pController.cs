@@ -245,6 +245,7 @@ public class pController : Photon.Pun.MonoBehaviourPun
             sp.color = new Color(1f, 1f, 1f, 1f);
         }
 
+        gc.transform.Find("pStatus").Find("health").GetComponent<Text>().text = health.ToString();
     }
 
     public void stopFire() {
@@ -264,6 +265,10 @@ public class pController : Photon.Pun.MonoBehaviourPun
         if (collision.gameObject.tag == "coin") {
             //nCoin++;
             gm.addCoin();
+            Destroy(collision.gameObject, 0f);
+        } else if(collision.gameObject.tag == "portion") {
+            //nPortion++;
+            gm.addPortion();
             Destroy(collision.gameObject, 0f);
         } else {
             if (isDamage) return;

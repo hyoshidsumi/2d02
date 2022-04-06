@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class coinController : MonoBehaviour
 {
-    float duration = 4f;
+    float duration = 8f;
     void Start()
     {
         Destroy(gameObject, duration);

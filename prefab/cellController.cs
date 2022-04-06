@@ -6,7 +6,7 @@ public class cellController : MonoBehaviour
 {
     int r;
     public float dt_metastasis;
-    public GameObject cellPrefab, extinctPrefab, coinPrefab;
+    public GameObject cellPrefab, extinctPrefab, coinPrefab, portionPrefab;
     public float dpos;
     public int hp;
     public int tree_max;    
@@ -52,9 +52,12 @@ public class cellController : MonoBehaviour
         hp--;
         if(hp < 0) {
             GameObject effect_extinct = Instantiate(extinctPrefab,transform.position,Quaternion.identity);
-            r = UnityEngine.Random.Range(0, 2);//0,1,2,3
-            if(r == 0) {
+            r = UnityEngine.Random.Range(0, 3);//0,1,2,3
+            Debug.Log(r);
+            if(r == 2) {
                 GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            } else if (r == 1) {
+                GameObject portion = Instantiate(portionPrefab, transform.position, Quaternion.identity);
             }
             gm.addDestroy();
             Destroy(gameObject);
