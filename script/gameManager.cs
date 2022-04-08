@@ -34,9 +34,21 @@ public class gameManager : MonoBehaviour
         //        PlayerPrefs.SetInt("bestTime",100);
         //        PlayerPrefs.SetInt("bestScore",0);        
 
+        loadSavedata();
+    }
+
+    void loadSavedata()
+    {
         transform.Find("myName").gameObject.GetComponent<Text>().text = PlayerPrefs.GetString("name");
         transform.Find("pStatus").Find("lName").GetComponent<Text>().text = PlayerPrefs.GetString("name");
+        nPortion = PlayerPrefs.GetInt("nPortion");
+        nCoin = PlayerPrefs.GetInt("nCoin");
+    }
 
+    void savedata()
+    {
+        PlayerPrefs.SetInt("nPortion",nPortion);
+        PlayerPrefs.SetInt("nCoin",nCoin);
     }
 
     void Update()
@@ -99,7 +111,9 @@ public class gameManager : MonoBehaviour
         clearUI.transform.Find("Image").Find("bestTime").gameObject.GetComponent<Text>().text = bestTime.ToString(); 
         clearUI.transform.Find("Image").Find("bestScore").gameObject.GetComponent<Text>().text = bestScore.ToString(); 
         clearUI.transform.Find("Image").Find("bestTimeDate").gameObject.GetComponent<Text>().text = bestTimeDate.ToString(); 
-        clearUI.transform.Find("Image").Find("bestScoreDate").gameObject.GetComponent<Text>().text = bestScoreDate.ToString(); 
+        clearUI.transform.Find("Image").Find("bestScoreDate").gameObject.GetComponent<Text>().text = bestScoreDate.ToString();
+
+        savedata();
     }
 
     public void fail() {
@@ -126,11 +140,14 @@ public class gameManager : MonoBehaviour
         fire2Controller f2c = p.GetComponent<fire2Controller>();
         f2c.fire3();
     }
-    public void coin()
+    public void portion()
     {
         Slider pSlider = transform.Find("pStatus").Find("pSlider").GetComponent<Slider>();
+        nPortion -= 1;
         GameObject p = GameObject.FindGameObjectWithTag("Player");
-        fire2Controller fc2 = p.GetComponent<fire2Controller>();
+        pController pc = p.GetComponent<pController>();
+        pc.usePortion(10);
+
     }
 
 }

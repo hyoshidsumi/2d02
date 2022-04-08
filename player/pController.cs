@@ -32,6 +32,8 @@ public class pController : Photon.Pun.MonoBehaviourPun
     float sumTime = 0f;
     public int nCoin;
 
+    Slider hSlider;
+
     void Start()
     {
         rbody = this.GetComponent<Rigidbody2D>();
@@ -42,6 +44,7 @@ public class pController : Photon.Pun.MonoBehaviourPun
         gc = GameObject.FindGameObjectWithTag("GameController");
         sp = GetComponent<SpriteRenderer>();
         sp.color = new Color(1f, 1f, 1f, 0.3f);
+        hSlider = gc.transform.Find("pStatus").Find("hSlider").GetComponent<Slider>();
     }
 
     void Update()
@@ -230,7 +233,18 @@ public class pController : Photon.Pun.MonoBehaviourPun
             motion.Play(motionName);
             lastMotion = motionName;
         }
+        
+        // Input 
+        if (Input.GetButtonDown("MouseX"))
+        {
+            useItem1();
+        }
+        if (Input.GetButtonDown("MouseY"))
+        {
+            useItem2();
+        }
 
+        // Health
         if (isDamage)
         {
             sumTime += Time.deltaTime;
@@ -245,6 +259,8 @@ public class pController : Photon.Pun.MonoBehaviourPun
             sp.color = new Color(1f, 1f, 1f, 1f);
         }
 
+//        Slider hSlider = gc.transform.Find("pStatus").Find("hSlider").GetComponent<Slider>();
+        hSlider.value = (float)health / (float)health_max;
         gc.transform.Find("pStatus").Find("health").GetComponent<Text>().text = health.ToString();
     }
 
@@ -280,12 +296,33 @@ public class pController : Photon.Pun.MonoBehaviourPun
                 gm.fail();
             }
 
-            Slider hSlider = gc.transform.Find("pStatus").Find("hSlider").GetComponent<Slider>();
-            hSlider.value = (float)health / (float)health_max;
-            gm.hText.GetComponent<Text>().text = health.ToString();
 
             StartCoroutine(onDamage());
         }
+    }
+
+    void useItem1()
+    {
+        usePortion(10);
+    }
+
+    void useItem2()
+    {
+        useCoin(10);
+    }
+
+
+    public void usePortion(int dhealth)
+    {
+        health += dhealth;
+        if (health > health_max) health = health_max;
+        Debug.Log(health);
+    }
+    public void useCoin(int dpower)
+    {
+
+        health += dpower;
+        if (health > health_max) health = health_max;
     }
 
     public IEnumerator onDamage() {
