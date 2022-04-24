@@ -62,9 +62,13 @@ public class fire2Controller : Photon.Pun.MonoBehaviourPun
     public void fire1(){
         if(!isFire) {
             isFire = true;
+            motion.SetBool("isFire", true);
             soundManager.sm.playSE(se.Arrow);
             Invoke("fire1main",0.2f);
             Invoke("stopFire",0.2f);
+        } else
+        {
+            motion.SetBool("isFire", false);
         }
     }
     public void fire2() {

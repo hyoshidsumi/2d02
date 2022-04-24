@@ -18,6 +18,9 @@ public class gameManager : MonoBehaviour
     changeScene cs;
     int nDestroy;
     public int nCoin,nPortion;
+    public Animator aportion;
+    bool isGetPortion=false;
+    GameObject player, grid;
 
     void Start()
     {
@@ -29,6 +32,11 @@ public class gameManager : MonoBehaviour
         nDestroy = 0;
 
         soundManager.sm.playBGM();
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        grid = GameObject.FindGameObjectWithTag("grid");
+
+        //aportion = transform.Find("inputUI").Find("bPortion").gameObject.GetComponent<Animator>();
 
         //debug—p
         //        PlayerPrefs.SetInt("bestTime",100);
@@ -53,6 +61,23 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(grid.transform.Find("Tilemap") + " " + grid.transform.Find("Tilemap").GetComponent<Renderer>().sortingOrder);
+//        Debug.Log("sortingLayer:" + GetComponent<SortingLayer>());
+        Debug.Log(" sortingOrder" + player.GetComponent<Renderer>().sortingOrder);
+        Debug.Log(" Renderer:" + player.GetComponent<Renderer>() + " SRender:" + player.GetComponent<SpriteRenderer>());
+        if(Time.time > 4.0f)
+        {
+            grid.transform.Find("Tilemap2").GetComponent<Renderer>().sortingOrder = 2;
+        }
+        aportion.SetBool("isGetPortion", true);
+        //Debug.Log(transform.Find("inputUI").Find("bPortion"));
+
+
+
+        Animator a = transform.Find("inputUI").Find("bCoin").GetComponent<Animator>();
+        a.SetBool("isGetCoin", true);
+
+
         GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
         if(trees.Length == 0) {
 //        if(trees.Length < 5) { //for Debug (clear stage)
@@ -74,11 +99,14 @@ public class gameManager : MonoBehaviour
     public void addCoin() {
         nCoin++;
         transform.Find("inputUI").Find("bCoin").Find("Text").GetComponent<Text>().text = nCoin.ToString();
+
+        Debug.Log(transform.Find("inputUI").Find("bCoin").GetComponent<Animator>());
     }
     public void addPortion()
     {
         nPortion++;
         transform.Find("inputUI").Find("bPortion").Find("Text").GetComponent<Text>().text = nPortion.ToString();
+
     }
     public void clear() {
         clearUI.SetActive(true);
