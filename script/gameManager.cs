@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 
 public class gameManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class gameManager : MonoBehaviour
     public Animator aportion;
     bool isGetPortion=false;
     GameObject player, grid;
+    bool isClear = false;
 
     void Start()
     {
@@ -61,14 +63,27 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(grid.transform.Find("Tilemap") + " " + grid.transform.Find("Tilemap").GetComponent<Renderer>().sortingOrder);
-//        Debug.Log("sortingLayer:" + GetComponent<SortingLayer>());
-        Debug.Log(" sortingOrder" + player.GetComponent<Renderer>().sortingOrder);
-        Debug.Log(" Renderer:" + player.GetComponent<Renderer>() + " SRender:" + player.GetComponent<SpriteRenderer>());
-        if(Time.time > 4.0f)
+//        Debug.Log(grid.transform.Find("Tilemap2") + " " + grid.transform.Find("Tilemap2").GetComponent<Renderer>().sortingOrder);
+        if(Time.time > 0.0f)
         {
             grid.transform.Find("Tilemap2").GetComponent<Renderer>().sortingOrder = 2;
+            
         }
+        if (Time.time > 0.0f)
+        {
+            /*
+            Color ctile2 = grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color;
+            Debug.Log(ctile2);
+            grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, 0.2f);
+            */
+            //            float i = 111;
+            //            grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, i / (float)255);
+            if (!isClear)
+            {
+                StartCoroutine(startTransparent());
+            }
+        }
+
         aportion.SetBool("isGetPortion", true);
         //Debug.Log(transform.Find("inputUI").Find("bPortion"));
 
@@ -93,6 +108,20 @@ public class gameManager : MonoBehaviour
             menu();
         }
     }
+
+    IEnumerator startTransparent()
+    {
+        isClear = true;
+        Color ctile2 = grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color;
+        Debug.Log("start" + ctile2 + " j:");
+//        float i = 111.0f;
+        for(int i = 0; i < 255; i++)
+        {
+            grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, i / (float)255);
+            yield return new WaitForSeconds(0.005f);
+        }
+    }
+
     public void addDestroy() {
         nDestroy++;
     }
@@ -118,8 +147,8 @@ public class gameManager : MonoBehaviour
         string date = DateTime.Now.ToString("MM/dd HH:mm");
         clearUI.transform.Find("Image").Find("name").gameObject.GetComponent<Text>().text = PlayerPrefs.GetString("name");
         clearUI.transform.Find("Image").Find("date").gameObject.GetComponent<Text>().text = date;
-        clearUI.transform.Find("Image").Find("time").gameObject.GetComponent<Text>().text = time.ToString(); 
-        clearUI.transform.Find("Image").Find("score").gameObject.GetComponent<Text>().text = score.ToString(); 
+        clearUI.transform.Find("Image").Find("time").gameObject.GetComponent<Text>().text = time.ToString();
+        clearUI.transform.Find("Image").Find("score").gameObject.GetComponent<Text>().text = score.ToString();
         int bestTime = PlayerPrefs.GetInt("bestTime");
         int bestScore = PlayerPrefs.GetInt("bestScore");
         string bestTimeDate = PlayerPrefs.GetString("bestTimeDate");
@@ -128,7 +157,7 @@ public class gameManager : MonoBehaviour
             bestTime = time;
             bestTimeDate = date;
             PlayerPrefs.SetInt("bestTime",bestTime);
-            PlayerPrefs.SetString("bestTimeDate",date);            
+            PlayerPrefs.SetString("bestTimeDate",date);       
         }
         if(score > bestScore) {
             bestScore = score;
