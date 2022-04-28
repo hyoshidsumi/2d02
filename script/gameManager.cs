@@ -63,35 +63,10 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
-//        Debug.Log(grid.transform.Find("Tilemap2") + " " + grid.transform.Find("Tilemap2").GetComponent<Renderer>().sortingOrder);
-        if(Time.time > 0.0f)
-        {
-            grid.transform.Find("Tilemap2").GetComponent<Renderer>().sortingOrder = 2;
-            
-        }
-        if (Time.time > 0.0f)
-        {
-            /*
-            Color ctile2 = grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color;
-            Debug.Log(ctile2);
-            grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, 0.2f);
-            */
-            //            float i = 111;
-            //            grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, i / (float)255);
-            if (!isClear)
-            {
-                StartCoroutine(startTransparent());
-            }
-        }
-
         aportion.SetBool("isGetPortion", true);
-        //Debug.Log(transform.Find("inputUI").Find("bPortion"));
-
-
 
         Animator a = transform.Find("inputUI").Find("bCoin").GetComponent<Animator>();
         a.SetBool("isGetCoin", true);
-
 
         GameObject[] trees = GameObject.FindGameObjectsWithTag("tree");
         if(trees.Length == 0) {
@@ -106,19 +81,6 @@ public class gameManager : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel")){
             menu();
-        }
-    }
-
-    IEnumerator startTransparent()
-    {
-        isClear = true;
-        Color ctile2 = grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color;
-        Debug.Log("start" + ctile2 + " j:");
-//        float i = 111.0f;
-        for(int i = 0; i < 255; i++)
-        {
-            grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, i / (float)255);
-            yield return new WaitForSeconds(0.005f);
         }
     }
 
@@ -138,12 +100,34 @@ public class gameManager : MonoBehaviour
 
     }
     public void clear() {
-        clearUI.SetActive(true);
         tc.isCount = false;
         soundManager.sm.playSE(se.Clear);
 
-        int time = int.Parse(transform.Find("timer").Find("timerText").GetComponent<Text>().text);     
-        int score = nDestroy * 10 + (100 -time) * 10;
+        savedata();
+
+        showClearAnimation();
+
+        StartCoroutine("startShowScore");
+    }
+
+    public void showClearAnimation()
+    {
+        grid.transform.Find("Tilemap2").GetComponent<Renderer>().sortingOrder = 1;
+        if (!isClear)
+        {
+            StartCoroutine(startTransparent());
+        }
+    }
+
+    void showScore()
+    {
+        /*--------------------------
+        - Save Scores (time, score)
+        - Update High Scores
+        ---------------------------*/
+        clearUI.SetActive(true);
+        int time = int.Parse(transform.Find("timer").Find("timerText").GetComponent<Text>().text);
+        int score = nDestroy * 10 + (100 - time) * 10;
         string date = DateTime.Now.ToString("MM/dd HH:mm");
         clearUI.transform.Find("Image").Find("name").gameObject.GetComponent<Text>().text = PlayerPrefs.GetString("name");
         clearUI.transform.Find("Image").Find("date").gameObject.GetComponent<Text>().text = date;
@@ -153,24 +137,42 @@ public class gameManager : MonoBehaviour
         int bestScore = PlayerPrefs.GetInt("bestScore");
         string bestTimeDate = PlayerPrefs.GetString("bestTimeDate");
         string bestScoreDate = PlayerPrefs.GetString("bestScoreDate");
-        if(time < bestTime) {
+        if (time < bestTime)
+        {
             bestTime = time;
             bestTimeDate = date;
-            PlayerPrefs.SetInt("bestTime",bestTime);
-            PlayerPrefs.SetString("bestTimeDate",date);       
+            PlayerPrefs.SetInt("bestTime", bestTime);
+            PlayerPrefs.SetString("bestTimeDate", date);
         }
-        if(score > bestScore) {
+        if (score > bestScore)
+        {
             bestScore = score;
             bestScoreDate = date;
-            PlayerPrefs.SetInt("bestScore",bestScore);
-            PlayerPrefs.SetString("bestScoreDate",date);            
+            PlayerPrefs.SetInt("bestScore", bestScore);
+            PlayerPrefs.SetString("bestScoreDate", date);
         }
-        clearUI.transform.Find("Image").Find("bestTime").gameObject.GetComponent<Text>().text = bestTime.ToString(); 
-        clearUI.transform.Find("Image").Find("bestScore").gameObject.GetComponent<Text>().text = bestScore.ToString(); 
-        clearUI.transform.Find("Image").Find("bestTimeDate").gameObject.GetComponent<Text>().text = bestTimeDate.ToString(); 
+        clearUI.transform.Find("Image").Find("bestTime").gameObject.GetComponent<Text>().text = bestTime.ToString();
+        clearUI.transform.Find("Image").Find("bestScore").gameObject.GetComponent<Text>().text = bestScore.ToString();
+        clearUI.transform.Find("Image").Find("bestTimeDate").gameObject.GetComponent<Text>().text = bestTimeDate.ToString();
         clearUI.transform.Find("Image").Find("bestScoreDate").gameObject.GetComponent<Text>().text = bestScoreDate.ToString();
+    }
 
-        savedata();
+    IEnumerator startShowScore()
+    {
+        yield return new WaitForSeconds(2.0f);
+        showScore();
+    }
+
+    IEnumerator startTransparent()
+    {
+        isClear = true;
+        Color ctile2 = grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color;
+        Debug.Log("start" + ctile2 + " j:");
+        for (int i = 0; i < 255; i++)
+        {
+            grid.transform.Find("Tilemap2").gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, i / (float)255);
+            yield return new WaitForSeconds(0.005f);
+        }
     }
 
     public void fail() {
