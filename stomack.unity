@@ -548,6 +548,7 @@ RectTransform:
   - {fileID: 1542887829}
   - {fileID: 1689136085}
   - {fileID: 63079195}
+  - {fileID: 1911485366}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21191,7 +21192,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 1.794}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 179.944}
 --- !u!1001 &955078694
 PrefabInstance:
@@ -35348,7 +35349,7 @@ GameObject:
   - component: {fileID: 1911485365}
   - component: {fileID: 1911485364}
   m_Layer: 0
-  m_Name: Square
+  m_Name: screen1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35383,7 +35384,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -35447,12 +35448,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911485363}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.9, y: 6.5, z: 0}
-  m_LocalScale: {x: 44.464973, y: 38.25824, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 200, y: 84, z: -23.267324}
+  m_LocalScale: {x: 1034.5809, y: 890.1669, z: 23.267324}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 208902056}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1916828659
 PrefabInstance:

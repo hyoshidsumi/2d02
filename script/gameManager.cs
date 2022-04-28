@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using UnityEngine.Video;
 
 public class gameManager : MonoBehaviour
 {
@@ -21,8 +22,9 @@ public class gameManager : MonoBehaviour
     public int nCoin,nPortion;
     public Animator aportion;
     bool isGetPortion=false;
-    GameObject player, grid;
+    GameObject player, grid, screen1;
     bool isClear = false;
+    
 
     void Start()
     {
@@ -37,6 +39,7 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         grid = GameObject.FindGameObjectWithTag("grid");
+        screen1 = transform.Find("screen1").gameObject;
 
         //aportion = transform.Find("inputUI").Find("bPortion").gameObject.GetComponent<Animator>();
 
@@ -112,6 +115,10 @@ public class gameManager : MonoBehaviour
 
     public void showClearAnimation()
     {
+        var vp1 = screen1.GetComponent<VideoPlayer>();
+        vp1.isLooping = false;
+        vp1.Play();
+
         grid.transform.Find("Tilemap2").GetComponent<Renderer>().sortingOrder = 1;
         if (!isClear)
         {
@@ -159,7 +166,7 @@ public class gameManager : MonoBehaviour
 
     IEnumerator startShowScore()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
         showScore();
     }
 
