@@ -36167,11 +36167,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearUI: {fileID: 401525427}
-  sliderUI: {fileID: 1077149964}
+  failUI: {fileID: 0}
   text: {fileID: 875346158}
   hText: {fileID: 1113618030}
   pText: {fileID: 1189108460}
   inputUI: {fileID: 1977338749}
+  residue: {fileID: 1992138895}
 --- !u!114 &1100959148
 MonoBehaviour:
   m_ObjectHideFlags: 0

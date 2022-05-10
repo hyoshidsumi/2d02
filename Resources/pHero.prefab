@@ -128,6 +128,7 @@ MonoBehaviour:
   iy0: 0
   health_max: 100
   sp: {fileID: 0}
+  nCoin: 0
 --- !u!114 &2084537225599175253
 MonoBehaviour:
   m_ObjectHideFlags: 0
