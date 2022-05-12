@@ -4,43 +4,40 @@ using UnityEngine;
 
 public class slotController : MonoBehaviour
 {
+    bool isStop = false;
     float h;
     float dy_sum;
     Vector2 spos;
+    GameObject number;
 
+    private void Awake()
+    {
+        number = transform.Find("number").gameObject;
+    }
     void Start()
     {
-        h = GetComponent<SpriteRenderer>().bounds.size.y;
+        h = number.GetComponent<SpriteRenderer>().bounds.size.y;
+        spos = number.transform.position;
 
     }
     void Update()
     {
-        StartCoroutine(start(20));
-
+        if (!isStop)
+        {
+            number.transform.Translate(0,-0.02f,0);
+            if (number.transform.position.y <= spos.y - h/2.0f)
+            {
+                number.transform.position = spos;
+            }
+        }
     }
-    IEnumerator start(int imax)
+//    IEnumerator start(int imax)
+    void start(int imax)
     {
-        spos = transform.position;
 
-        float x = spos.x;
-        float y = spos.y;
-        float y_ini = y;
 
-        for (int i = 0; i < 20; i++)
-        {
-            yield return new WaitForSeconds(0.1f);
-            y -= 0.5f;
-            dy_sum += 0.5f;
-            Debug.Log(dy_sum + " h:" + h + " a:" + a);
-            
-            spos = new Vector2(x, y);
             transform.position = spos;
-        }
 
-        if (dy_sum > h)
-        {
-            y = y_ini;
-        }
 
     }
 
