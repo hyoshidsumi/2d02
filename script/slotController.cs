@@ -12,10 +12,12 @@ public class slotController : MonoBehaviour
 
     private void Awake()
     {
-        number = transform.Find("number").gameObject;
+//        number = transform.Find("number").gameObject;
+//Awake‚Å‚·‚é‚ÆƒGƒ‰[o‚é‚ªÀÛ‚Í“®‚­
     }
     void Start()
     {
+        number = transform.Find("number").gameObject;
         h = number.GetComponent<SpriteRenderer>().bounds.size.y;
         spos = number.transform.position;
 
